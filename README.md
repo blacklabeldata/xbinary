@@ -24,7 +24,7 @@ var LittleEndian littleEndian
 var ErrOutOfRange = fmt.Errorf("Index out of range")
 ```
 
-#### type FastBuffer
+#### type ExtendedBuffer
 
 
 ExtendedBuffer interface simply wraps common binary encoding/decoding.
