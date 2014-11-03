@@ -7,8 +7,8 @@ import (
 // Errors
 var ErrOutOfRange = fmt.Errorf("Index out of range")
 
-// FastBuffer interface simply wraps common binary encoding/decoding.
-type FastBuffer interface {
+// ExtendedBuffer interface simply wraps common binary encoding/decoding.
+type ExtendedBuffer interface {
 
 	// Reads a uint16 at the specified index in a byte array.
 	// Returns an ErrOutOfRange if the index provided is outside the bounds of the byte array.

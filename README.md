@@ -15,18 +15,23 @@ var BigEndian bigEndian
 ```
 
 ```go
-var ErrOutOfRange = fmt.Errorf("Index out of range")
+var LittleEndian littleEndian
 ```
-Errors
+
+### Errors
 
 ```go
-var LittleEndian littleEndian
+var ErrOutOfRange = fmt.Errorf("Index out of range")
 ```
 
 #### type FastBuffer
 
+
+ExtendedBuffer interface simply wraps common binary encoding/decoding.
+
+
 ```go
-type FastBuffer interface {
+type ExtendedBuffer interface {
 
 	// Reads a uint16 at the specified index in a byte array.
 	// Returns an ErrOutOfRange if the index provided is outside the bounds of the byte array.
@@ -180,5 +185,3 @@ type FastBuffer interface {
 	PutFloat64Array(b []byte, index int, value []float64) (uint64, error)
 }
 ```
-
-FastBuffer interface simply wraps common binary encoding/decoding.
