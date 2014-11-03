@@ -13,8 +13,20 @@ func TestStringBigEndian(t *testing.T) {
 	expected := []byte{0x67, 0x6f, 0x6c, 0x61, 0x6e, 0x67}
 
 	// put string
-	BigEndian.PutString(buf, 0, "golang")
+	bytes, err := BigEndian.PutString(buf, 0, "golang")
 	assert.Equal(t, expected, buf)
+
+	// put string
+	bytes, err = BigEndian.PutString(buf, -1, "golang")
+	assert.Equal(t, 0, bytes)
+	assert.NotNil(t, err)
+	assert.Equal(t, err, ErrOutOfRange)
+
+	// put string
+	bytes, err = BigEndian.PutString(buf, 4, "golang")
+	assert.Equal(t, 0, bytes)
+	assert.NotNil(t, err)
+	assert.Equal(t, err, ErrOutOfRange)
 
 	// get string
 	name, err := BigEndian.String(buf, 0, 6)
@@ -29,7 +41,8 @@ func TestStringBigEndian(t *testing.T) {
 	// get string error
 	name, err = BigEndian.String(buf, -1, 6)
 	assert.Equal(t, "", name)
-	assert.NotNil(t, name)
+	assert.Equal(t, err, ErrOutOfRange)
+	assert.NotNil(t, err)
 }
 
 func TestUint16BigEndian(t *testing.T) {
