@@ -1,5 +1,7 @@
 # xbinary
 
+[![Coverage Status](https://coveralls.io/repos/eliquious/xbinary/badge.png)](https://coveralls.io/r/eliquious/xbinary)
+
 Extends the functionality provided by the 'binary' package in the Go standard lib. Adds 
 capability to read/write all signed and unsigned integer types as well as both float32 and
  float 64. Arrays for all numeric types are also supported.
