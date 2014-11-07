@@ -18,13 +18,13 @@ func TestString(t *testing.T) {
 
 	// put string
 	bytes, err = LittleEndian.PutString(buf, -1, "golang")
-	assert.Equal(t, 0, bytes)
+	assert.Equal(t, uint64(0), bytes)
 	assert.NotNil(t, err)
 	assert.Equal(t, err, ErrOutOfRange)
 
 	// put string
 	bytes, err = LittleEndian.PutString(buf, 4, "golang")
-	assert.Equal(t, 0, bytes)
+	assert.Equal(t, uint64(0), bytes)
 	assert.NotNil(t, err)
 	assert.Equal(t, err, ErrOutOfRange)
 
@@ -59,17 +59,17 @@ func TestUint16(t *testing.T) {
 	bytes, err := LittleEndian.PutUint16(buf, 0, expected)
 	assert.Nil(t, err)
 	assert.Equal(t, expected, binary.LittleEndian.Uint16(buf))
-	assert.Equal(t, 2, bytes)
+	assert.Equal(t, uint64(2), bytes)
 
 	// Put error (index = -1)
 	bytes, err = LittleEndian.PutUint16(buf, -1, expected)
 	assert.NotNil(t, err)
-	assert.Equal(t, 0, bytes)
+	assert.Equal(t, uint64(0), bytes)
 
 	// Put error
 	bytes, err = LittleEndian.PutUint16(buf, 2, expected)
 	assert.NotNil(t, err)
-	assert.Equal(t, 0, bytes)
+	assert.Equal(t, uint64(0), bytes)
 
 	// Get
 	val, err := LittleEndian.Uint16(buf, 0)
@@ -79,12 +79,12 @@ func TestUint16(t *testing.T) {
 	// Get Error (index = -1)
 	val, err = LittleEndian.Uint16(buf, -1)
 	assert.NotNil(t, err)
-	assert.Equal(t, 0, val)
+	assert.Equal(t, uint16(0), val)
 
 	// Get Error (index = 2)
 	val, err = LittleEndian.Uint16(buf, 2)
 	assert.NotNil(t, err)
-	assert.Equal(t, 0, val)
+	assert.Equal(t, uint16(0), val)
 }
 
 func TestUint32(t *testing.T) {
@@ -95,17 +95,17 @@ func TestUint32(t *testing.T) {
 	bytes, err := LittleEndian.PutUint32(buf, 0, expected)
 	assert.Nil(t, err)
 	assert.Equal(t, expected, binary.LittleEndian.Uint32(buf))
-	assert.Equal(t, 4, bytes)
+	assert.Equal(t, uint64(4), bytes)
 
 	// Put error (index = -1)
 	bytes, err = LittleEndian.PutUint32(buf, -1, expected)
 	assert.NotNil(t, err)
-	assert.Equal(t, 0, bytes)
+	assert.Equal(t, uint64(0), bytes)
 
 	// Put error (index = 2)
 	bytes, err = LittleEndian.PutUint32(buf, 2, expected)
 	assert.NotNil(t, err)
-	assert.Equal(t, 0, bytes)
+	assert.Equal(t, uint64(0), bytes)
 
 	// Get
 	val, err := LittleEndian.Uint32(buf, 0)
@@ -115,12 +115,12 @@ func TestUint32(t *testing.T) {
 	// Get Error (index = -1)
 	val, err = LittleEndian.Uint32(buf, -1)
 	assert.NotNil(t, err)
-	assert.Equal(t, 0, val)
+	assert.Equal(t, uint32(0), val)
 
 	// Get Error (index = 2)
 	val, err = LittleEndian.Uint32(buf, 2)
 	assert.NotNil(t, err)
-	assert.Equal(t, 0, val)
+	assert.Equal(t, uint32(0), val)
 }
 
 func TestUint64(t *testing.T) {
@@ -131,17 +131,17 @@ func TestUint64(t *testing.T) {
 	bytes, err := LittleEndian.PutUint64(buf, 0, expected)
 	assert.Nil(t, err)
 	assert.Equal(t, expected, binary.LittleEndian.Uint64(buf))
-	assert.Equal(t, 8, bytes)
+	assert.Equal(t, uint64(8), bytes)
 
 	// Put error (index = -1)
 	bytes, err = LittleEndian.PutUint64(buf, -1, expected)
 	assert.NotNil(t, err)
-	assert.Equal(t, 0, bytes)
+	assert.Equal(t, uint64(0), bytes)
 
 	// Put error (index = 2)
 	bytes, err = LittleEndian.PutUint64(buf, 2, expected)
 	assert.NotNil(t, err)
-	assert.Equal(t, 0, bytes)
+	assert.Equal(t, uint64(0), bytes)
 
 	// Get
 	val, err := LittleEndian.Uint64(buf, 0)
@@ -151,12 +151,12 @@ func TestUint64(t *testing.T) {
 	// Get Error (index = -1)
 	val, err = LittleEndian.Uint64(buf, -1)
 	assert.NotNil(t, err)
-	assert.Equal(t, 0, val)
+	assert.Equal(t, uint64(0), val)
 
 	// Get Error (index = 2)
 	val, err = LittleEndian.Uint64(buf, 2)
 	assert.NotNil(t, err)
-	assert.Equal(t, 0, val)
+	assert.Equal(t, uint64(0), val)
 }
 
 func TestInt16(t *testing.T) {
@@ -167,17 +167,17 @@ func TestInt16(t *testing.T) {
 	bytes, err := LittleEndian.PutInt16(buf, 0, expected)
 	assert.Nil(t, err)
 	assert.Equal(t, expected, int16(binary.LittleEndian.Uint16(buf)))
-	assert.Equal(t, 2, bytes)
+	assert.Equal(t, uint64(2), bytes)
 
 	// Put error (index = -1)
 	bytes, err = LittleEndian.PutInt16(buf, -1, expected)
 	assert.NotNil(t, err)
-	assert.Equal(t, 0, bytes)
+	assert.Equal(t, uint64(0), bytes)
 
 	// Put error
 	bytes, err = LittleEndian.PutInt16(buf, 2, expected)
 	assert.NotNil(t, err)
-	assert.Equal(t, 0, bytes)
+	assert.Equal(t, uint64(0), bytes)
 
 	// Get
 	val, err := LittleEndian.Int16(buf, 0)
@@ -187,12 +187,12 @@ func TestInt16(t *testing.T) {
 	// Get Error (index = -1)
 	val, err = LittleEndian.Int16(buf, -1)
 	assert.NotNil(t, err)
-	assert.Equal(t, 0, val)
+	assert.Equal(t, int16(0), val)
 
 	// Get Error (index = 2)
 	val, err = LittleEndian.Int16(buf, 2)
 	assert.NotNil(t, err)
-	assert.Equal(t, 0, val)
+	assert.Equal(t, int16(0), val)
 }
 
 func TestInt32(t *testing.T) {
@@ -203,17 +203,17 @@ func TestInt32(t *testing.T) {
 	bytes, err := LittleEndian.PutInt32(buf, 0, expected)
 	assert.Nil(t, err)
 	assert.Equal(t, expected, int32(binary.LittleEndian.Uint32(buf)))
-	assert.Equal(t, 4, bytes)
+	assert.Equal(t, uint64(4), bytes)
 
 	// Put error (index = -1)
 	bytes, err = LittleEndian.PutInt32(buf, -1, expected)
 	assert.NotNil(t, err)
-	assert.Equal(t, 0, bytes)
+	assert.Equal(t, uint64(0), bytes)
 
 	// Put error
 	bytes, err = LittleEndian.PutInt32(buf, 2, expected)
 	assert.NotNil(t, err)
-	assert.Equal(t, 0, bytes)
+	assert.Equal(t, uint64(0), bytes)
 
 	// Get
 	val, err := LittleEndian.Int32(buf, 0)
@@ -223,12 +223,12 @@ func TestInt32(t *testing.T) {
 	// Get Error (index = -1)
 	val, err = LittleEndian.Int32(buf, -1)
 	assert.NotNil(t, err)
-	assert.Equal(t, 0, val)
+	assert.Equal(t, int32(0), val)
 
 	// Get Error (index = 2)
 	val, err = LittleEndian.Int32(buf, 2)
 	assert.NotNil(t, err)
-	assert.Equal(t, 0, val)
+	assert.Equal(t, int32(0), val)
 }
 
 func TestInt64(t *testing.T) {
@@ -239,17 +239,17 @@ func TestInt64(t *testing.T) {
 	bytes, err := LittleEndian.PutInt64(buf, 0, expected)
 	assert.Nil(t, err)
 	assert.Equal(t, expected, int64(binary.LittleEndian.Uint64(buf)))
-	assert.Equal(t, 8, bytes)
+	assert.Equal(t, uint64(8), bytes)
 
 	// Put error (index = -1)
 	bytes, err = LittleEndian.PutInt64(buf, -1, expected)
 	assert.NotNil(t, err)
-	assert.Equal(t, 0, bytes)
+	assert.Equal(t, uint64(0), bytes)
 
 	// Put error
 	bytes, err = LittleEndian.PutInt64(buf, 2, expected)
 	assert.NotNil(t, err)
-	assert.Equal(t, 0, bytes)
+	assert.Equal(t, uint64(0), bytes)
 
 	// Get
 	val, err := LittleEndian.Int64(buf, 0)
@@ -259,12 +259,12 @@ func TestInt64(t *testing.T) {
 	// Get Error (index = -1)
 	val, err = LittleEndian.Int64(buf, -1)
 	assert.NotNil(t, err)
-	assert.Equal(t, 0, val)
+	assert.Equal(t, int64(0), val)
 
 	// Get Error (index = 2)
 	val, err = LittleEndian.Int64(buf, 2)
 	assert.NotNil(t, err)
-	assert.Equal(t, 0, val)
+	assert.Equal(t, int64(0), val)
 }
 
 func TestFloat32(t *testing.T) {
@@ -275,17 +275,17 @@ func TestFloat32(t *testing.T) {
 	bytes, err := LittleEndian.PutFloat32(buf, 0, expected)
 	assert.Nil(t, err)
 	assert.Equal(t, expected, math.Float32frombits(binary.LittleEndian.Uint32(buf)))
-	assert.Equal(t, 4, bytes)
+	assert.Equal(t, uint64(4), bytes)
 
 	// Put error (index = -1)
 	bytes, err = LittleEndian.PutFloat32(buf, -1, expected)
 	assert.NotNil(t, err)
-	assert.Equal(t, 0, bytes)
+	assert.Equal(t, uint64(0), bytes)
 
 	// Put error (index = 2)
 	bytes, err = LittleEndian.PutFloat32(buf, 2, expected)
 	assert.NotNil(t, err)
-	assert.Equal(t, 0, bytes)
+	assert.Equal(t, uint64(0), bytes)
 
 	// Get
 	val, err := LittleEndian.Float32(buf, 0)
@@ -295,12 +295,12 @@ func TestFloat32(t *testing.T) {
 	// Get Error (index = -1)
 	val, err = LittleEndian.Float32(buf, -1)
 	assert.NotNil(t, err)
-	assert.Equal(t, 0, val)
+	assert.Equal(t, float32(0), val)
 
 	// Get Error (index = 2)
 	val, err = LittleEndian.Float32(buf, 2)
 	assert.NotNil(t, err)
-	assert.Equal(t, 0, val)
+	assert.Equal(t, float32(0), val)
 }
 
 func TestFloat64(t *testing.T) {
@@ -311,17 +311,17 @@ func TestFloat64(t *testing.T) {
 	bytes, err := LittleEndian.PutFloat64(buf, 0, expected)
 	assert.Nil(t, err)
 	assert.Equal(t, expected, math.Float64frombits(binary.LittleEndian.Uint64(buf)))
-	assert.Equal(t, 8, bytes)
+	assert.Equal(t, uint64(8), bytes)
 
 	// Put error (index = -1)
 	bytes, err = LittleEndian.PutFloat64(buf, -1, expected)
 	assert.NotNil(t, err)
-	assert.Equal(t, 0, bytes)
+	assert.Equal(t, uint64(0), bytes)
 
 	// Put error (index = 2)
 	bytes, err = LittleEndian.PutFloat64(buf, 2, expected)
 	assert.NotNil(t, err)
-	assert.Equal(t, 0, bytes)
+	assert.Equal(t, uint64(0), bytes)
 
 	// Get
 	val, err := LittleEndian.Float64(buf, 0)
@@ -331,12 +331,12 @@ func TestFloat64(t *testing.T) {
 	// Get Error (index = -1)
 	val, err = LittleEndian.Float64(buf, -1)
 	assert.NotNil(t, err)
-	assert.Equal(t, 0, val)
+	assert.Equal(t, float64(0), val)
 
 	// Get Error (index = 2)
 	val, err = LittleEndian.Float64(buf, 2)
 	assert.NotNil(t, err)
-	assert.Equal(t, 0, val)
+	assert.Equal(t, float64(0), val)
 }
 
 func TestUint16Array(t *testing.T) {
@@ -346,7 +346,7 @@ func TestUint16Array(t *testing.T) {
 	// Put
 	bytes, err := LittleEndian.PutUint16Array(buf, 0, expected)
 	assert.Nil(t, err)
-	assert.Equal(t, 6, bytes)
+	assert.Equal(t, uint64(6), bytes)
 	assert.Equal(t, expected[0], binary.LittleEndian.Uint16(buf))
 	assert.Equal(t, expected[1], binary.LittleEndian.Uint16(buf[2:]))
 	assert.Equal(t, expected[2], binary.LittleEndian.Uint16(buf[4:]))
@@ -354,12 +354,12 @@ func TestUint16Array(t *testing.T) {
 	// Put error (index = -1)
 	bytes, err = LittleEndian.PutUint16Array(buf, -1, expected)
 	assert.NotNil(t, err)
-	assert.Equal(t, 0, bytes)
+	assert.Equal(t, uint64(0), bytes)
 
 	// Put error
 	bytes, err = LittleEndian.PutUint16Array(buf, 2, expected)
 	assert.NotNil(t, err)
-	assert.Equal(t, 0, bytes)
+	assert.Equal(t, uint64(0), bytes)
 
 	// Get
 	dest := make([]uint16, 3)
@@ -371,16 +371,16 @@ func TestUint16Array(t *testing.T) {
 	dest = make([]uint16, 3)
 	err = LittleEndian.Uint16Array(buf, -1, &dest)
 	assert.NotNil(t, err)
-	assert.Equal(t, dest[0], 0)
-	assert.Equal(t, dest[1], 0)
-	assert.Equal(t, dest[2], 0)
+	assert.Equal(t, dest[0], uint16(0))
+	assert.Equal(t, dest[1], uint16(0))
+	assert.Equal(t, dest[2], uint16(0))
 
 	// Get Error (index = 2)
 	err = LittleEndian.Uint16Array(buf, 2, &dest)
 	assert.NotNil(t, err)
-	assert.Equal(t, dest[0], 0)
-	assert.Equal(t, dest[1], 0)
-	assert.Equal(t, dest[2], 0)
+	assert.Equal(t, dest[0], uint16(0))
+	assert.Equal(t, dest[1], uint16(0))
+	assert.Equal(t, dest[2], uint16(0))
 }
 
 func TestInt16Array(t *testing.T) {
@@ -390,7 +390,7 @@ func TestInt16Array(t *testing.T) {
 	// Put
 	bytes, err := LittleEndian.PutInt16Array(buf, 0, expected)
 	assert.Nil(t, err)
-	assert.Equal(t, 6, bytes)
+	assert.Equal(t, uint64(6), bytes)
 	assert.Equal(t, expected[0], int16(binary.LittleEndian.Uint16(buf)))
 	assert.Equal(t, expected[1], int16(binary.LittleEndian.Uint16(buf[2:])))
 	assert.Equal(t, expected[2], int16(binary.LittleEndian.Uint16(buf[4:])))
@@ -398,12 +398,12 @@ func TestInt16Array(t *testing.T) {
 	// Put error (index = -1)
 	bytes, err = LittleEndian.PutInt16Array(buf, -1, expected)
 	assert.NotNil(t, err)
-	assert.Equal(t, 0, bytes)
+	assert.Equal(t, uint64(0), bytes)
 
 	// Put error
 	bytes, err = LittleEndian.PutInt16Array(buf, 2, expected)
 	assert.NotNil(t, err)
-	assert.Equal(t, 0, bytes)
+	assert.Equal(t, uint64(0), bytes)
 
 	// Get
 	dest := make([]int16, 3)
@@ -415,16 +415,16 @@ func TestInt16Array(t *testing.T) {
 	dest = make([]int16, 3)
 	err = LittleEndian.Int16Array(buf, -1, &dest)
 	assert.NotNil(t, err)
-	assert.Equal(t, dest[0], 0)
-	assert.Equal(t, dest[1], 0)
-	assert.Equal(t, dest[2], 0)
+	assert.Equal(t, dest[0], int16(0))
+	assert.Equal(t, dest[1], int16(0))
+	assert.Equal(t, dest[2], int16(0))
 
 	// Get Error (index = 2)
 	err = LittleEndian.Int16Array(buf, 2, &dest)
 	assert.NotNil(t, err)
-	assert.Equal(t, dest[0], 0)
-	assert.Equal(t, dest[1], 0)
-	assert.Equal(t, dest[2], 0)
+	assert.Equal(t, dest[0], int16(0))
+	assert.Equal(t, dest[1], int16(0))
+	assert.Equal(t, dest[2], int16(0))
 }
 
 func TestUint32Array(t *testing.T) {
@@ -434,7 +434,7 @@ func TestUint32Array(t *testing.T) {
 	// Put
 	bytes, err := LittleEndian.PutUint32Array(buf, 0, expected)
 	assert.Nil(t, err)
-	assert.Equal(t, 12, bytes)
+	assert.Equal(t, uint64(12), bytes)
 	assert.Equal(t, expected[0], binary.LittleEndian.Uint32(buf))
 	assert.Equal(t, expected[1], binary.LittleEndian.Uint32(buf[4:]))
 	assert.Equal(t, expected[2], binary.LittleEndian.Uint32(buf[8:]))
@@ -442,12 +442,12 @@ func TestUint32Array(t *testing.T) {
 	// Put error (index = -1)
 	bytes, err = LittleEndian.PutUint32Array(buf, -1, expected)
 	assert.NotNil(t, err)
-	assert.Equal(t, 0, bytes)
+	assert.Equal(t, uint64(0), bytes)
 
 	// Put error
 	bytes, err = LittleEndian.PutUint32Array(buf, 2, expected)
 	assert.NotNil(t, err)
-	assert.Equal(t, 0, bytes)
+	assert.Equal(t, uint64(0), bytes)
 
 	// Get
 	dest := make([]uint32, 3)
@@ -459,16 +459,16 @@ func TestUint32Array(t *testing.T) {
 	dest = make([]uint32, 3)
 	err = LittleEndian.Uint32Array(buf, -1, &dest)
 	assert.NotNil(t, err)
-	assert.Equal(t, dest[0], 0)
-	assert.Equal(t, dest[1], 0)
-	assert.Equal(t, dest[2], 0)
+	assert.Equal(t, dest[0], uint32(0))
+	assert.Equal(t, dest[1], uint32(0))
+	assert.Equal(t, dest[2], uint32(0))
 
 	// Get Error (index = 2)
 	err = LittleEndian.Uint32Array(buf, 2, &dest)
 	assert.NotNil(t, err)
-	assert.Equal(t, dest[0], 0)
-	assert.Equal(t, dest[1], 0)
-	assert.Equal(t, dest[2], 0)
+	assert.Equal(t, dest[0], uint32(0))
+	assert.Equal(t, dest[1], uint32(0))
+	assert.Equal(t, dest[2], uint32(0))
 }
 
 func TestInt32Array(t *testing.T) {
@@ -478,7 +478,7 @@ func TestInt32Array(t *testing.T) {
 	// Put
 	bytes, err := LittleEndian.PutInt32Array(buf, 0, expected)
 	assert.Nil(t, err)
-	assert.Equal(t, 12, bytes)
+	assert.Equal(t, uint64(12), bytes)
 	assert.Equal(t, expected[0], int32(binary.LittleEndian.Uint32(buf)))
 	assert.Equal(t, expected[1], int32(binary.LittleEndian.Uint32(buf[4:])))
 	assert.Equal(t, expected[2], int32(binary.LittleEndian.Uint32(buf[8:])))
@@ -486,12 +486,12 @@ func TestInt32Array(t *testing.T) {
 	// Put error (index = -1)
 	bytes, err = LittleEndian.PutInt32Array(buf, -1, expected)
 	assert.NotNil(t, err)
-	assert.Equal(t, 0, bytes)
+	assert.Equal(t, uint64(0), bytes)
 
 	// Put error
 	bytes, err = LittleEndian.PutInt32Array(buf, 2, expected)
 	assert.NotNil(t, err)
-	assert.Equal(t, 0, bytes)
+	assert.Equal(t, uint64(0), bytes)
 
 	// Get
 	dest := make([]int32, 3)
@@ -503,16 +503,16 @@ func TestInt32Array(t *testing.T) {
 	dest = make([]int32, 3)
 	err = LittleEndian.Int32Array(buf, -1, &dest)
 	assert.NotNil(t, err)
-	assert.Equal(t, dest[0], 0)
-	assert.Equal(t, dest[1], 0)
-	assert.Equal(t, dest[2], 0)
+	assert.Equal(t, dest[0], int32(0))
+	assert.Equal(t, dest[1], int32(0))
+	assert.Equal(t, dest[2], int32(0))
 
 	// Get Error (index = 2)
 	err = LittleEndian.Int32Array(buf, 2, &dest)
 	assert.NotNil(t, err)
-	assert.Equal(t, dest[0], 0)
-	assert.Equal(t, dest[1], 0)
-	assert.Equal(t, dest[2], 0)
+	assert.Equal(t, dest[0], int32(0))
+	assert.Equal(t, dest[1], int32(0))
+	assert.Equal(t, dest[2], int32(0))
 }
 
 func TestUint64Array(t *testing.T) {
@@ -522,7 +522,7 @@ func TestUint64Array(t *testing.T) {
 	// Put
 	bytes, err := LittleEndian.PutUint64Array(buf, 0, expected)
 	assert.Nil(t, err)
-	assert.Equal(t, 24, bytes)
+	assert.Equal(t, uint64(24), bytes)
 	assert.Equal(t, expected[0], binary.LittleEndian.Uint64(buf))
 	assert.Equal(t, expected[1], binary.LittleEndian.Uint64(buf[8:]))
 	assert.Equal(t, expected[2], binary.LittleEndian.Uint64(buf[16:]))
@@ -532,12 +532,12 @@ func TestUint64Array(t *testing.T) {
 	// Put error (index = -1)
 	bytes, err = LittleEndian.PutUint64Array(buf, -1, expected)
 	assert.NotNil(t, err)
-	assert.Equal(t, 0, bytes)
+	assert.Equal(t, uint64(0), bytes)
 
 	// Put error
 	bytes, err = LittleEndian.PutUint64Array(buf, 2, expected)
 	assert.NotNil(t, err)
-	assert.Equal(t, 0, bytes)
+	assert.Equal(t, uint64(0), bytes)
 
 	// Get
 	dest := make([]uint64, 3)
@@ -551,16 +551,16 @@ func TestUint64Array(t *testing.T) {
 	dest = make([]uint64, 3)
 	err = LittleEndian.Uint64Array(buf, -1, &dest)
 	assert.NotNil(t, err)
-	assert.Equal(t, dest[0], 0)
-	assert.Equal(t, dest[1], 0)
-	assert.Equal(t, dest[2], 0)
+	assert.Equal(t, dest[0], uint64(0))
+	assert.Equal(t, dest[1], uint64(0))
+	assert.Equal(t, dest[2], uint64(0))
 
 	// Get Error (index = 2)
 	err = LittleEndian.Uint64Array(buf, 2, &dest)
 	assert.NotNil(t, err)
-	assert.Equal(t, dest[0], 0)
-	assert.Equal(t, dest[1], 0)
-	assert.Equal(t, dest[2], 0)
+	assert.Equal(t, dest[0], uint64(0))
+	assert.Equal(t, dest[1], uint64(0))
+	assert.Equal(t, dest[2], uint64(0))
 }
 
 func TestInt64Array(t *testing.T) {
@@ -570,7 +570,7 @@ func TestInt64Array(t *testing.T) {
 	// Put
 	bytes, err := LittleEndian.PutInt64Array(buf, 0, expected)
 	assert.Nil(t, err)
-	assert.Equal(t, 24, bytes)
+	assert.Equal(t, uint64(24), bytes)
 	assert.Equal(t, expected[0], int64(binary.LittleEndian.Uint64(buf)))
 	assert.Equal(t, expected[1], int64(binary.LittleEndian.Uint64(buf[8:])))
 	assert.Equal(t, expected[2], int64(binary.LittleEndian.Uint64(buf[16:])))
@@ -578,12 +578,12 @@ func TestInt64Array(t *testing.T) {
 	// Put error (index = -1)
 	bytes, err = LittleEndian.PutInt64Array(buf, -1, expected)
 	assert.NotNil(t, err)
-	assert.Equal(t, 0, bytes)
+	assert.Equal(t, uint64(0), bytes)
 
 	// Put error
 	bytes, err = LittleEndian.PutInt64Array(buf, 2, expected)
 	assert.NotNil(t, err)
-	assert.Equal(t, 0, bytes)
+	assert.Equal(t, uint64(0), bytes)
 
 	// Get
 	dest := make([]int64, 3)
@@ -595,16 +595,16 @@ func TestInt64Array(t *testing.T) {
 	dest = make([]int64, 3)
 	err = LittleEndian.Int64Array(buf, -1, &dest)
 	assert.NotNil(t, err)
-	assert.Equal(t, dest[0], 0)
-	assert.Equal(t, dest[1], 0)
-	assert.Equal(t, dest[2], 0)
+	assert.Equal(t, dest[0], int64(0))
+	assert.Equal(t, dest[1], int64(0))
+	assert.Equal(t, dest[2], int64(0))
 
 	// Get Error (index = 2)
 	err = LittleEndian.Int64Array(buf, 2, &dest)
 	assert.NotNil(t, err)
-	assert.Equal(t, dest[0], 0)
-	assert.Equal(t, dest[1], 0)
-	assert.Equal(t, dest[2], 0)
+	assert.Equal(t, dest[0], int64(0))
+	assert.Equal(t, dest[1], int64(0))
+	assert.Equal(t, dest[2], int64(0))
 }
 
 func TestFloat32Array(t *testing.T) {
@@ -614,7 +614,7 @@ func TestFloat32Array(t *testing.T) {
 	// Put
 	bytes, err := LittleEndian.PutFloat32Array(buf, 0, expected)
 	assert.Nil(t, err)
-	assert.Equal(t, 12, bytes)
+	assert.Equal(t, uint64(12), bytes)
 	assert.Equal(t, expected[0], math.Float32frombits(binary.LittleEndian.Uint32(buf)))
 	assert.Equal(t, expected[1], math.Float32frombits(binary.LittleEndian.Uint32(buf[4:])))
 	assert.Equal(t, expected[2], math.Float32frombits(binary.LittleEndian.Uint32(buf[8:])))
@@ -622,12 +622,12 @@ func TestFloat32Array(t *testing.T) {
 	// Put error (index = -1)
 	bytes, err = LittleEndian.PutFloat32Array(buf, -1, expected)
 	assert.NotNil(t, err)
-	assert.Equal(t, 0, bytes)
+	assert.Equal(t, uint64(0), bytes)
 
 	// Put error
 	bytes, err = LittleEndian.PutFloat32Array(buf, 2, expected)
 	assert.NotNil(t, err)
-	assert.Equal(t, 0, bytes)
+	assert.Equal(t, uint64(0), bytes)
 
 	// Get
 	dest := make([]float32, 3)
@@ -639,16 +639,16 @@ func TestFloat32Array(t *testing.T) {
 	dest = make([]float32, 3)
 	err = LittleEndian.Float32Array(buf, -1, &dest)
 	assert.NotNil(t, err)
-	assert.Equal(t, dest[0], 0.0)
-	assert.Equal(t, dest[1], 0.0)
-	assert.Equal(t, dest[2], 0.0)
+	assert.Equal(t, dest[0], float32(0.0))
+	assert.Equal(t, dest[1], float32(0.0))
+	assert.Equal(t, dest[2], float32(0.0))
 
 	// Get Error (index = 2)
 	err = LittleEndian.Float32Array(buf, 2, &dest)
 	assert.NotNil(t, err)
-	assert.Equal(t, dest[0], 0.0)
-	assert.Equal(t, dest[1], 0.0)
-	assert.Equal(t, dest[2], 0.0)
+	assert.Equal(t, dest[0], float32(0.0))
+	assert.Equal(t, dest[1], float32(0.0))
+	assert.Equal(t, dest[2], float32(0.0))
 }
 
 func TestFloat64Array(t *testing.T) {
@@ -658,7 +658,7 @@ func TestFloat64Array(t *testing.T) {
 	// Put
 	bytes, err := LittleEndian.PutFloat64Array(buf, 0, expected)
 	assert.Nil(t, err)
-	assert.Equal(t, 24, bytes)
+	assert.Equal(t, uint64(24), bytes)
 	assert.Equal(t, expected[0], math.Float64frombits(binary.LittleEndian.Uint64(buf)))
 	assert.Equal(t, expected[1], math.Float64frombits(binary.LittleEndian.Uint64(buf[8:])))
 	assert.Equal(t, expected[2], math.Float64frombits(binary.LittleEndian.Uint64(buf[16:])))
@@ -666,12 +666,12 @@ func TestFloat64Array(t *testing.T) {
 	// Put error (index = -1)
 	bytes, err = LittleEndian.PutFloat64Array(buf, -1, expected)
 	assert.NotNil(t, err)
-	assert.Equal(t, 0, bytes)
+	assert.Equal(t, uint64(0), bytes)
 
 	// Put error
 	bytes, err = LittleEndian.PutFloat64Array(buf, 2, expected)
 	assert.NotNil(t, err)
-	assert.Equal(t, 0, bytes)
+	assert.Equal(t, uint64(0), bytes)
 
 	// Get
 	dest := make([]float64, 3)
@@ -683,14 +683,14 @@ func TestFloat64Array(t *testing.T) {
 	dest = make([]float64, 3)
 	err = LittleEndian.Float64Array(buf, -1, &dest)
 	assert.NotNil(t, err)
-	assert.Equal(t, dest[0], 0.0)
-	assert.Equal(t, dest[1], 0.0)
-	assert.Equal(t, dest[2], 0.0)
+	assert.Equal(t, dest[0], float64(0.0))
+	assert.Equal(t, dest[1], float64(0.0))
+	assert.Equal(t, dest[2], float64(0.0))
 
 	// Get Error (index = 2)
 	err = LittleEndian.Float64Array(buf, 2, &dest)
 	assert.NotNil(t, err)
-	assert.Equal(t, dest[0], 0.0)
-	assert.Equal(t, dest[1], 0.0)
-	assert.Equal(t, dest[2], 0.0)
+	assert.Equal(t, dest[0], float64(0.0))
+	assert.Equal(t, dest[1], float64(0.0))
+	assert.Equal(t, dest[2], float64(0.0))
 }
