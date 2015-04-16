@@ -9,6 +9,20 @@ type littleEndian struct{}
 
 var LittleEndian littleEndian
 
+func (littleEndian) Uint8(b []byte, index int) (uint8, error) {
+	if len(b) < index || index < 0 {
+		return 0, ErrOutOfRange
+	}
+	return uint8(b[index]), nil
+}
+
+func (littleEndian) Int8(b []byte, index int) (int8, error) {
+	if len(b) < index || index < 0 {
+		return 0, ErrOutOfRange
+	}
+	return int8(b[index]), nil
+}
+
 func (littleEndian) Uint16(b []byte, index int) (uint16, error) {
 	if len(b) < index+1 || index < 0 {
 		return 0, ErrOutOfRange
@@ -66,7 +80,15 @@ func (l littleEndian) Float64(b []byte, index int) (float64, error) {
 	return math.Float64frombits(val), nil
 }
 
-func (littleEndian) PutUint16(b []byte, index int, v uint16) (uint64, error) {
+func (littleEndian) PutUint8(b []byte, index int, v uint8) (int, error) {
+	if len(b) < index || index < 0 {
+		return 0, ErrOutOfRange
+	}
+	b[index] = byte(v)
+	return 1, nil
+}
+
+func (littleEndian) PutUint16(b []byte, index int, v uint16) (int, error) {
 	if len(b) < index+1 || index < 0 {
 		return 0, ErrOutOfRange
 	}
@@ -74,7 +96,7 @@ func (littleEndian) PutUint16(b []byte, index int, v uint16) (uint64, error) {
 	return 2, nil
 }
 
-func (littleEndian) PutUint32(b []byte, index int, v uint32) (uint64, error) {
+func (littleEndian) PutUint32(b []byte, index int, v uint32) (int, error) {
 	if len(b) < index+3 || index < 0 {
 		return 0, ErrOutOfRange
 	}
@@ -82,7 +104,7 @@ func (littleEndian) PutUint32(b []byte, index int, v uint32) (uint64, error) {
 	return 4, nil
 }
 
-func (littleEndian) PutUint64(b []byte, index int, v uint64) (uint64, error) {
+func (littleEndian) PutUint64(b []byte, index int, v uint64) (int, error) {
 	if len(b) < index+7 || index < 0 {
 		return 0, ErrOutOfRange
 	}
@@ -90,7 +112,15 @@ func (littleEndian) PutUint64(b []byte, index int, v uint64) (uint64, error) {
 	return 8, nil
 }
 
-func (littleEndian) PutInt16(b []byte, index int, v int16) (uint64, error) {
+func (littleEndian) PutInt8(b []byte, index int, v int8) (int, error) {
+	if len(b) < index || index < 0 {
+		return 0, ErrOutOfRange
+	}
+	b[index] = byte(v)
+	return 1, nil
+}
+
+func (littleEndian) PutInt16(b []byte, index int, v int16) (int, error) {
 	if len(b) < index+1 || index < 0 {
 		return 0, ErrOutOfRange
 	}
@@ -98,7 +128,7 @@ func (littleEndian) PutInt16(b []byte, index int, v int16) (uint64, error) {
 	return 2, nil
 }
 
-func (littleEndian) PutInt32(b []byte, index int, v int32) (uint64, error) {
+func (littleEndian) PutInt32(b []byte, index int, v int32) (int, error) {
 	if len(b) < index+3 || index < 0 {
 		return 0, ErrOutOfRange
 	}
@@ -106,7 +136,7 @@ func (littleEndian) PutInt32(b []byte, index int, v int32) (uint64, error) {
 	return 4, nil
 }
 
-func (littleEndian) PutInt64(b []byte, index int, v int64) (uint64, error) {
+func (littleEndian) PutInt64(b []byte, index int, v int64) (int, error) {
 	if len(b) < index+7 || index < 0 {
 		return 0, ErrOutOfRange
 	}
@@ -114,7 +144,7 @@ func (littleEndian) PutInt64(b []byte, index int, v int64) (uint64, error) {
 	return 8, nil
 }
 
-func (littleEndian) PutFloat64(b []byte, index int, v float64) (uint64, error) {
+func (littleEndian) PutFloat64(b []byte, index int, v float64) (int, error) {
 	if len(b) < index+7 || index < 0 {
 		return 0, ErrOutOfRange
 	}
@@ -122,7 +152,7 @@ func (littleEndian) PutFloat64(b []byte, index int, v float64) (uint64, error) {
 	return 8, nil
 }
 
-func (littleEndian) PutFloat32(b []byte, index int, v float32) (uint64, error) {
+func (littleEndian) PutFloat32(b []byte, index int, v float32) (int, error) {
 	if len(b) < index+3 || index < 0 {
 		return 0, ErrOutOfRange
 	}
@@ -209,7 +239,7 @@ func (littleEndian) Float64Array(b []byte, index int, dest *[]float64) error {
 	return nil
 }
 
-func (littleEndian) PutUint16Array(b []byte, index int, value []uint16) (uint64, error) {
+func (littleEndian) PutUint16Array(b []byte, index int, value []uint16) (int, error) {
 	var reqsize = (len(value)*2 + index)
 	if reqsize > len(b) || index < 0 {
 		return 0, ErrOutOfRange
@@ -217,10 +247,10 @@ func (littleEndian) PutUint16Array(b []byte, index int, value []uint16) (uint64,
 	for i := 0; i < len(value); i++ {
 		binary.LittleEndian.PutUint16(b[index+i*2:], value[i])
 	}
-	return uint64(len(value) * 2), nil
+	return (len(value) * 2), nil
 }
 
-func (littleEndian) PutUint32Array(b []byte, index int, value []uint32) (uint64, error) {
+func (littleEndian) PutUint32Array(b []byte, index int, value []uint32) (int, error) {
 	var reqsize = (len(value)*4 + index)
 	if reqsize > len(b) || index < 0 {
 		return 0, ErrOutOfRange
@@ -228,10 +258,10 @@ func (littleEndian) PutUint32Array(b []byte, index int, value []uint32) (uint64,
 	for i := 0; i < len(value); i++ {
 		binary.LittleEndian.PutUint32(b[index+i*4:], value[i])
 	}
-	return uint64(reqsize - index), nil
+	return (reqsize - index), nil
 }
 
-func (littleEndian) PutUint64Array(b []byte, index int, value []uint64) (uint64, error) {
+func (littleEndian) PutUint64Array(b []byte, index int, value []uint64) (int, error) {
 	var reqsize = (len(value)*8 + index)
 	if reqsize > len(b) || index < 0 {
 		return 0, ErrOutOfRange
@@ -239,10 +269,10 @@ func (littleEndian) PutUint64Array(b []byte, index int, value []uint64) (uint64,
 	for i := 0; i < len(value); i++ {
 		binary.LittleEndian.PutUint64(b[index+i*8:], value[i])
 	}
-	return uint64(reqsize - index), nil
+	return (reqsize - index), nil
 }
 
-func (littleEndian) PutInt16Array(b []byte, index int, value []int16) (uint64, error) {
+func (littleEndian) PutInt16Array(b []byte, index int, value []int16) (int, error) {
 	var reqsize = (len(value)*2 + index)
 	if reqsize > len(b) || index < 0 {
 		return 0, ErrOutOfRange
@@ -250,10 +280,10 @@ func (littleEndian) PutInt16Array(b []byte, index int, value []int16) (uint64, e
 	for i := 0; i < len(value); i++ {
 		binary.LittleEndian.PutUint16(b[index+i*2:], uint16(value[i]))
 	}
-	return uint64(len(value) * 2), nil
+	return (len(value) * 2), nil
 }
 
-func (littleEndian) PutInt32Array(b []byte, index int, value []int32) (uint64, error) {
+func (littleEndian) PutInt32Array(b []byte, index int, value []int32) (int, error) {
 	var reqsize = (len(value)*4 + index)
 	if reqsize > len(b) || index < 0 {
 		return 0, ErrOutOfRange
@@ -261,10 +291,10 @@ func (littleEndian) PutInt32Array(b []byte, index int, value []int32) (uint64, e
 	for i := 0; i < len(value); i++ {
 		binary.LittleEndian.PutUint32(b[index+i*4:], uint32(value[i]))
 	}
-	return uint64(reqsize - index), nil
+	return (reqsize - index), nil
 }
 
-func (littleEndian) PutInt64Array(b []byte, index int, value []int64) (uint64, error) {
+func (littleEndian) PutInt64Array(b []byte, index int, value []int64) (int, error) {
 	var reqsize = (len(value)*8 + index)
 	if reqsize > len(b) || index < 0 {
 		return 0, ErrOutOfRange
@@ -272,10 +302,10 @@ func (littleEndian) PutInt64Array(b []byte, index int, value []int64) (uint64, e
 	for i := 0; i < len(value); i++ {
 		binary.LittleEndian.PutUint64(b[index+i*8:], uint64(value[i]))
 	}
-	return uint64(reqsize - index), nil
+	return (reqsize - index), nil
 }
 
-func (littleEndian) PutFloat32Array(b []byte, index int, value []float32) (uint64, error) {
+func (littleEndian) PutFloat32Array(b []byte, index int, value []float32) (int, error) {
 	var reqsize = (len(value)*4 + index)
 	if reqsize > len(b) || index < 0 {
 		return 0, ErrOutOfRange
@@ -283,10 +313,10 @@ func (littleEndian) PutFloat32Array(b []byte, index int, value []float32) (uint6
 	for i := 0; i < len(value); i++ {
 		binary.LittleEndian.PutUint32(b[index+i*4:], math.Float32bits(value[i]))
 	}
-	return uint64(reqsize - index), nil
+	return (reqsize - index), nil
 }
 
-func (littleEndian) PutFloat64Array(b []byte, index int, value []float64) (uint64, error) {
+func (littleEndian) PutFloat64Array(b []byte, index int, value []float64) (int, error) {
 	var reqsize = (len(value)*8 + index)
 	if reqsize > len(b) || index < 0 {
 		return 0, ErrOutOfRange
@@ -294,7 +324,7 @@ func (littleEndian) PutFloat64Array(b []byte, index int, value []float64) (uint6
 	for i := 0; i < len(value); i++ {
 		binary.LittleEndian.PutUint64(b[index+i*8:], math.Float64bits(value[i]))
 	}
-	return uint64(reqsize - index), nil
+	return (reqsize - index), nil
 }
 
 func (littleEndian) String(b []byte, index, size int) (string, error) {
@@ -304,10 +334,32 @@ func (littleEndian) String(b []byte, index, size int) (string, error) {
 	return string(b[index:]), nil
 }
 
-func (littleEndian) PutString(b []byte, index int, value string) (uint64, error) {
+func (littleEndian) PutString(b []byte, index int, value string) (int, error) {
 	if index+len(value) > len(b) || index < 0 {
 		return 0, ErrOutOfRange
 	}
 	copy(b[index:index+len(value)], []byte(value))
-	return uint64(len(value)), nil
+	return (len(value)), nil
+}
+
+func (littleEndian) PutUint8Array(b []byte, index int, value []uint8) (int, error) {
+	var reqsize = (len(value) + index)
+	if reqsize > len(b) || index < 0 {
+		return 0, ErrOutOfRange
+	}
+	for i := 0; i < len(value); i++ {
+		b[index+i] = byte(value[i])
+	}
+	return (len(value)), nil
+}
+
+func (littleEndian) PutInt8Array(b []byte, index int, value []int8) (int, error) {
+	var reqsize = (len(value) + index)
+	if reqsize > len(b) || index < 0 {
+		return 0, ErrOutOfRange
+	}
+	for i := 0; i < len(value); i++ {
+		b[index+i] = byte(value[i])
+	}
+	return (len(value)), nil
 }
