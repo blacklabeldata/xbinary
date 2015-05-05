@@ -7,7 +7,7 @@ capability to read/write all signed and unsigned integer types as well as both f
  float 64. Arrays for all numeric types are also supported.
 
 --
-    import "."
+    import "github.com/swiftkick-io/xbinary"
 
 
 ## Usage
