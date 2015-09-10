@@ -1,13 +1,13 @@
 # xbinary
 
-[![Coverage Status](https://coveralls.io/repos/eliquious/xbinary/badge.png)](https://coveralls.io/r/eliquious/xbinary) [![Build Status](https://travis-ci.org/eliquious/xbinary.svg)](https://travis-ci.org/eliquious/xbinary)
+[![Coverage Status](https://coveralls.io/repos/blacklabeldata/xbinary/badge.svg?branch=master&service=github)](https://coveralls.io/github/blacklabeldata/xbinary?branch=master) [![Build Status](https://travis-ci.org/blacklabeldata/xbinary.svg)](https://travis-ci.org/blacklabeldata/xbinary)
 
-Extends the functionality provided by the 'binary' package in the Go standard lib. Adds 
+Extends the functionality provided by the 'binary' package in the Go standard lib. Adds
 capability to read/write all signed and unsigned integer types as well as both float32 and
  float 64. Arrays for all numeric types are also supported.
 
 --
-    import "github.com/swiftkick-io/xbinary"
+    import "github.com/blacklabeldata/xbinary"
 
 
 ## Usage
