@@ -9,7 +9,9 @@ before_install:
   - go get github.com/axw/gocov/gocov
   - go get github.com/mattn/goveralls
   - go get golang.org/x/tools/cmd/cover
-install:
-  - go get github.com/stretchr/testify/assert
+  - go get github.com/tools/godep
 script:
-    - $HOME/gopath/bin/goveralls -repotoken $COVERALLS_TOKEN
+    - make bench
+    - make test
+    - make detail
+    - $HOME/gopath/bin/goveralls -coverprofile=coverage.out -service=travis-ci -repotoken $COVERALLS_TOKEN
